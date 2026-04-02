@@ -1,0 +1,11 @@
+{
+  "name": "Hailong",
+  "title": "a software engineer",
+  "bio": "I'm very interested in LLMs and am currently taking courses on agents. I'm a moderate user of Vibe Coding.",
+  "avatar": "https://api.dicebear.com/9.x/notionists/svg?seed=Felix",
+  "social": {
+    "github": "https://github.com/Aaron1993",
+    "email": "suaaron1993@gmail.com"
+  },
+  "skills": ["React", "TypeScript", "Node.js", "Python", "Docker"]
+}

@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Getting Started with React and TypeScript",
+      "content": "# Getting Started with React and TypeScript\n\nReact and TypeScript are a powerful combination for building modern web applications. In this post, we'll explore how to set up a new project and best practices.\n\n## Why TypeScript?\n\nTypeScript adds static type checking to JavaScript, helping you catch errors early and write more maintainable code.\n\n```typescript\ninterface Props {\n  name: string;\n  age: number;\n}\n\nconst Component: React.FC<Props> = ({ name, age }) => {\n  return <div>{name} is {age} years old</div>;\n};\n```\n\n## Setting Up Your Project\n\nYou can create a new React TypeScript project using Vite:\n\n```bash\nnpm create vite@latest my-app -- --template react-ts\n```\n\nHappy coding!",
+      "excerpt": "Learn how to build modern web applications with React and TypeScript. A comprehensive guide for beginners.",
+      "tags": ["React", "TypeScript", "Tutorial"],
+      "createdAt": "2024-03-15",
+      "updatedAt": "2024-03-15",
+      "published": true
+    },
+    {
+      "id": "4",
+      "title": "Writing Mathematical Formulas in Markdown",
+      "content": "# Writing Mathematical Formulas in Markdown\n\nThis blog now supports LaTeX math formulas! You can write beautiful mathematical expressions using inline and block syntax.\n\n## Inline Math\n\nUse single dollar signs for inline math: $E = mc^2$\n\nOr use double backslashes with parentheses: \\( \\int_{a}^{b} f(x) dx \\)\n\n## Block Math\n\nUse double dollar signs for block equations:\n\n$$\\frac{d}{dx}\\left( \\int_{a}^{x} f(t) dt \\right) = f(x)$$\n\nOr use double backslashes with square brackets:\n\n\\[\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n\\]\n\n## Examples\n\n### Quadratic Formula\n$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n### Gaussian Distribution\n$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{1}{2}\\left(\\frac{x-\\mu}{\\sigma}\\right)^2}$$\n\n### Matrix\n$$\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$$\n\nEnjoy writing mathematical content!",
+      "excerpt": "Learn how to write LaTeX math formulas in your blog posts with examples.",
+      "tags": ["Markdown", "LaTeX", "Math", "Tutorial"],
+      "createdAt": "2024-04-02",
+      "updatedAt": "2024-04-02",
+      "published": true
+    },
+    {
+      "id": "2",
+      "title": "Building a REST API with Node.js",
+      "content": "# Building a REST API with Node.js\n\nNode.js is an excellent choice for building scalable APIs. Let's create a simple REST API from scratch.\n\n## Project Setup\n\nFirst, initialize your project:\n\n```bash\nmkdir my-api\ncd my-api\nnpm init -y\nnpm install express\n```\n\n## Creating the Server\n\n```javascript\nconst express = require('express');\nconst app = express();\n\napp.use(express.json());\n\napp.get('/api/users', (req, res) => {\n  res.json([{ id: 1, name: 'John' }]);\n});\n\napp.listen(3000, () => {\n  console.log('Server running on port 3000');\n});\n```\n\nThis is just the beginning of what you can build with Node.js!",
+      "excerpt": "Step-by-step guide to building a RESTful API using Node.js and Express.",
+      "tags": ["Node.js", "API", "Backend"],
+      "createdAt": "2024-03-10",
+      "updatedAt": "2024-03-12",
+      "published": true
+    },
+    {
+      "id": "3",
+      "title": "Docker for Beginners",
+      "content": "# Docker for Beginners\n\nDocker has revolutionized how we deploy applications. This guide will help you understand the basics.\n\n## What is Docker?\n\nDocker is a platform for developing, shipping, and running applications in containers.\n\n## Your First Dockerfile\n\n```dockerfile\nFROM node:18-alpine\n\nWORKDIR /app\n\nCOPY package*.json ./\nRUN npm install\n\nCOPY . .\n\nEXPOSE 3000\n\nCMD [\"node\", \"server.js\"]\n```\n\n## Building and Running\n\n```bash\ndocker build -t my-app .\ndocker run -p 3000:3000 my-app\n```\n\nContainerization makes deployment much easier!",
+      "excerpt": "Learn Docker fundamentals and containerize your first application.",
+      "tags": ["Docker", "DevOps", "Tutorial"],
+      "createdAt": "2024-03-05",
+      "updatedAt": "2024-03-05",
+      "published": true
+    }
+  ]
+}
