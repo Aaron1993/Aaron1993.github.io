@@ -4,7 +4,7 @@ import { X, Lock } from 'lucide-react';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: (password: string) => boolean;
+  onLogin: (password: string) => boolean | Promise<boolean>;
 }
 
 export function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
@@ -13,7 +13,7 @@ export function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     
@@ -22,7 +22,7 @@ export function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
       return;
     }
 
-    const success = onLogin(password);
+    const success = await onLogin(password);
     if (!success) {
       setError('Invalid password');
       setPassword('');

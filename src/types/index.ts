@@ -23,6 +23,30 @@ export interface Profile {
   skills: string[];
 }
 
+export interface AboutSection {
+  id: string;
+  title: string;
+  content: string;
+  order: number;
+  enabled: boolean;
+}
+
+export interface NavItem {
+  id: string;
+  label: string;
+  path: string;
+  icon: string;
+  order: number;
+  enabled: boolean;
+  isCustom: boolean;
+  content?: string;
+}
+
+export interface SiteConfig {
+  navItems: NavItem[];
+  aboutSections: AboutSection[];
+}
+
 export interface DraftPost {
   title: string;
   content: string;

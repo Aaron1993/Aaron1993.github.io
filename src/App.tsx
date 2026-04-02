@@ -8,6 +8,7 @@ import { BlogPost } from './pages/BlogPost';
 import { BlogEdit } from './pages/BlogEdit';
 import { About } from './pages/About';
 import { Admin } from './pages/Admin';
+import { CustomPage } from './pages/CustomPage';
 import { useAuth } from './hooks/useAuth';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     return false;
   });
 
-  const { isAdmin, showLoginModal, login, logout, openLoginModal, closeLoginModal } = useAuth();
+  const { isAdmin, showLoginModal, login, logout, openLoginModal, closeLoginModal, changePassword } = useAuth();
 
   useEffect(() => {
     if (darkMode) {
@@ -53,7 +54,7 @@ function App() {
             path="/admin" 
             element={
               isAdmin ? (
-                <Admin onLogout={logout} />
+                <Admin onLogout={logout} onChangePassword={changePassword} />
               ) : (
                 <div className="container mx-auto px-4 py-12 text-center">
                   <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -83,6 +84,7 @@ function App() {
             } 
           />
           <Route path="/about" element={<About />} />
+          <Route path="/:path" element={<CustomPage />} />
         </Routes>
       </Layout>
 

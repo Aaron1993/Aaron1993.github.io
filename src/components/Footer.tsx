@@ -10,7 +10,7 @@ export function Footer() {
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
             <span>Made with</span>
             <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-            <span>by Developer</span>
+            <span>by Qoder</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -37,7 +37,7 @@ export function Footer() {
           </div>
 
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            &copy; {currentYear} DevBlog. All rights reserved.
+            &copy; {currentYear} Hailong. All rights reserved.
           </p>
         </div>
       </div>

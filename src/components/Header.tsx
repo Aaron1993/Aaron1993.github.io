@@ -1,5 +1,23 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, FileText, User, Moon, Sun, LogOut, Shield } from 'lucide-react';
+import { Home, FileText, User, Moon, Sun, LogOut, Shield, BookOpen, Award, Briefcase, Globe, Star, Heart, Zap, Layout, type LucideIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { getSiteConfig } from '../utils/dataManager';
+import type { NavItem } from '../types';
+
+const iconMap: Record<string, LucideIcon> = {
+  Home,
+  FileText,
+  User,
+  Shield,
+  BookOpen,
+  Award,
+  Briefcase,
+  Globe,
+  Star,
+  Heart,
+  Zap,
+  Layout,
+};
 
 interface HeaderProps {
   darkMode: boolean;
@@ -10,20 +28,18 @@ interface HeaderProps {
 
 export function Header({ darkMode, toggleDarkMode, isAdmin, onLogout }: HeaderProps) {
   const location = useLocation();
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
 
-  // Different nav items for admin vs visitor
-  const visitorNavItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { path: '/blog', label: 'Blog', icon: FileText },
-    { path: '/about', label: 'About', icon: User },
-  ];
-
-  const adminNavItems = [
-    { path: '/admin', label: 'Dashboard', icon: Shield },
-    { path: '/blog', label: 'Blog', icon: FileText },
-  ];
-
-  const navItems = isAdmin ? adminNavItems : visitorNavItems;
+  useEffect(() => {
+    const config = getSiteConfig();
+    const items = isAdmin 
+      ? [
+          { id: 'admin', label: 'Dashboard', path: '/admin', icon: 'Shield', order: 0, enabled: true, isCustom: false },
+          { id: 'blog', label: 'Blog', path: '/blog', icon: 'FileText', order: 1, enabled: true, isCustom: false },
+        ]
+      : config.navItems.filter(item => item.enabled).sort((a, b) => a.order - b.order);
+    setNavItems(items);
+  }, [isAdmin]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
@@ -32,12 +48,12 @@ export function Header({ darkMode, toggleDarkMode, isAdmin, onLogout }: HeaderPr
           <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">HL</span>
           </div>
-          <span className="font-bold text-xl text-gray-900 dark:text-white">Hailong's Blog</span>
+          <span className="font-bold text-xl text-gray-900 dark:text-white">Hailong's Page</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const Icon = item.icon;
+            const IconComponent = iconMap[item.icon] || Layout;
             const isActive = location.pathname === item.path;
             return (
               <Link
@@ -49,7 +65,7 @@ export function Header({ darkMode, toggleDarkMode, isAdmin, onLogout }: HeaderPr
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <IconComponent className="w-4 h-4" />
                 {item.label}
               </Link>
             );
@@ -80,7 +96,7 @@ export function Header({ darkMode, toggleDarkMode, isAdmin, onLogout }: HeaderPr
       <nav className="md:hidden border-t border-gray-200 dark:border-gray-800">
         <div className="flex justify-around py-2">
           {navItems.map((item) => {
-            const Icon = item.icon;
+            const IconComponent = iconMap[item.icon] || Layout;
             const isActive = location.pathname === item.path;
             return (
               <Link
@@ -92,7 +108,7 @@ export function Header({ darkMode, toggleDarkMode, isAdmin, onLogout }: HeaderPr
                     : 'text-gray-600 dark:text-gray-400'
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                <IconComponent className="w-5 h-5" />
                 {item.label}
               </Link>
             );

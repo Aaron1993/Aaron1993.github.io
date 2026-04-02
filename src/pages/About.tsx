@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, GraduationCap } from 'lucide-react';
-import { fetchProfile } from '../utils/dataManager';
-import type { Profile } from '../types';
+import { fetchProfile, getSiteConfig } from '../utils/dataManager';
+import type { Profile, AboutSection } from '../types';
 
 export function About() {
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [aboutSections, setAboutSections] = useState<AboutSection[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProfile = async () => {
-      const data = await fetchProfile();
-      setProfile(data);
+    const loadData = async () => {
+      const [profileData, config] = await Promise.all([
+        fetchProfile(),
+        getSiteConfig(),
+      ]);
+      setProfile(profileData);
+      setAboutSections(config.aboutSections.filter(s => s.enabled).sort((a, b) => a.order - b.order));
       setLoading(false);
     };
-    loadProfile();
+    loadData();
   }, []);
 
   if (loading) {
@@ -144,6 +149,25 @@ export function About() {
             </div>
           </div>
         </div>
+
+        {/* Configurable About Sections */}
+        {aboutSections.map((section) => (
+          <div
+            key={section.id}
+            className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              {section.title}
+            </h2>
+            <div className="prose dark:prose-invert max-w-none">
+              {section.content.split('\n').map((paragraph, idx) => (
+                <p key={idx} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
