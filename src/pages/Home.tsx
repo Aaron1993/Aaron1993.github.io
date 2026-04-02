@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code2, Terminal, Cpu } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { PostCard } from '../components/PostCard';
 import { fetchPosts, fetchProfile } from '../utils/dataManager';
 import type { Post, Profile } from '../types';
